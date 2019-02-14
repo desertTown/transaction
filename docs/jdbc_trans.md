@@ -1,6 +1,9 @@
 # jdbc事务
 
 
+
+## 代码如上
+
 ```java
 package com.nick.example;
 
@@ -72,3 +75,8 @@ public class LocalJDBCTransApplication {
     }
 }
 ```
+
+
+* 设置事务，需要设置链接属性不自动提交``connection.setAutoCommit(false);``
+* 提交事务，使用：``connection.commit();``
+* 查询，如果需要锁定，则修改sql语句加上``FOR UPDATE``,但是千万留意，for update最好加上条件，避免查询锁全表，如:``select *  from t_user where id=1 FOR UPDATE`` 

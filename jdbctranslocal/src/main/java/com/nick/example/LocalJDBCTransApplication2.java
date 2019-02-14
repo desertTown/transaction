@@ -3,34 +3,35 @@ package com.nick.example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class LocalJDBCTransApplication {
-    private static final Logger log = LoggerFactory.getLogger(LocalJDBCTransApplication.class);
+public class LocalJDBCTransApplication2 {
+    private static final Logger log = LoggerFactory.getLogger(LocalJDBCTransApplication2.class);
     public static void main(String[] args) {
         Connection connection = getConnection();
         try {
             connection.setAutoCommit(false);
-            String sql1 = "UPDATE t_user SET amount = amount-100 where username=?";
+
+
+            String sql1 = "select *  from t_user";
+//            String sql1 = "select *  from t_user FOR UPDATE"; //读操作需要获得锁 默认锁全表，最好加上where条件
             PreparedStatement ps1 = connection.prepareStatement(sql1);
 
-            String sql2 = "UPDATE t_user SET amount = amount+100 where username =?";
-            PreparedStatement ps2 = connection.prepareStatement(sql2);
+            ResultSet rs = ps1.executeQuery();
+            while (rs.next()){
+                String username =   rs.getString(2);
+                Integer amount =   rs.getInt(3);
+                log.info("{} has amount: {}",username,amount);
+            }
 
-            ps1.setString(1,"nick");
-            ps1.executeUpdate();
+//            String sql2 = "UPDATE t_user SET amount = amount+100 where username =?";
+//            PreparedStatement ps2 = connection.prepareStatement(sql2);
+//            ps2.setString(1,"elaine");
+//            ps2.executeUpdate();
 
-            ps2.setString(1,"elaine");
-            ps2.executeUpdate();
-
-//            throwException();
             connection.commit();
 
             ps1.close();
-            ps2.close();
             connection.close();
 
         }catch (Exception e){
