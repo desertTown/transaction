@@ -5,7 +5,7 @@
 * idea
 * docker 
 * maven 
-
+* spring boot 2.1.2.RELEASE
 
 ## docker 运行mysql
 
