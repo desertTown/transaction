@@ -7,7 +7,9 @@
 * [jdbc事务](docs/jdbc_trans.md)
 * [spring事务机制](docs/spring_trans.md)
 * [jpa事务](docs/jpa_trans.md)
+* [jms事务](docs/jms_trans.md)
 
 
-4-4
+
+4-6
 
