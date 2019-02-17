@@ -8,6 +8,7 @@
 * [spring事务机制](docs/spring_trans.md)
 * [jpa事务](docs/jpa_trans.md)
 * [jms事务](docs/jms_trans.md)
+* [外部事务jta](docs/jta_trans.md)
 
 
 
