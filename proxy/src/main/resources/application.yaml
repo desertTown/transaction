@@ -15,3 +15,11 @@ zuul:
       path: /home/**
       serviceId: user
       stripPrefix: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"

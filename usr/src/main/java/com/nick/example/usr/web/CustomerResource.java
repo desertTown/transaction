@@ -1,6 +1,7 @@
 package com.nick.example.usr.web;
 
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.nick.example.usr.domain.Customer;
 import com.nick.example.usr.repository.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,9 @@ public class CustomerResource {
     public Customer create(@RequestBody Customer customer){
         return customerRepository.save(customer);
     }
+
     @GetMapping("")
+    @HystrixCommand
     public List<Customer> getAll(){
         return customerRepository.findAll();
     }
