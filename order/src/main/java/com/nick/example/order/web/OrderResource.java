@@ -1,5 +1,7 @@
 package com.nick.example.order.web;
 
+import com.nick.example.dto.IOrderService;
+import com.nick.example.dto.OrderDTO;
 import com.nick.example.order.dao.OrderRepository;
 import com.nick.example.order.domain.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/order")
-public class OrderResource {
+public class OrderResource implements IOrderService {
 
     @PostConstruct
     public void init() {
@@ -37,11 +39,17 @@ public class OrderResource {
     }
 
     @GetMapping("/{id}")
-    public String getMyOrder(@PathVariable Long id) {
-        Optional<Order> order = orderRepository.findById(id);
-        if (order.isPresent())
-            return order.get().getTitle();
+    public OrderDTO getMyOrder(@PathVariable Long id) {
+        Optional<Order> orderOptional = orderRepository.findById(id);
+        if (orderOptional.isPresent()){
+            Order order = orderOptional.get();
+            OrderDTO dto = new OrderDTO();
+            dto.setId(order.getId());
+            dto.setTitle(order.getTitle());
+            dto.setDetail(order.getDetail());
+            return dto;
+        }
         else
-            return "";
+            return null;
     }
 }

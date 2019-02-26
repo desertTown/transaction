@@ -2,6 +2,7 @@ package com.nick.example.usr.web;
 
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.nick.example.dto.OrderDTO;
 import com.nick.example.usr.domain.Customer;
 import com.nick.example.usr.feign.OrderClient;
 import com.nick.example.usr.repository.CustomerRepository;
@@ -48,7 +49,7 @@ public class CustomerResource {
     @HystrixCommand
     public Map getMyInfo(){
         Customer customer = customerRepository.findOneByUserName("nick");
-        String order = orderClient.getMyOrder(1L);
+        OrderDTO order = orderClient.getMyOrder(1L);
         Map result = new HashMap();
         result.put("customer",customer);
         result.put("order",order);
