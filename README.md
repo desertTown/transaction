@@ -11,9 +11,10 @@
 * [外部事务jta](docs/jta_trans.md)
 * [分布式系统](docs/distribution.md)
 * [spring cloud微服务架构](docs/spring_cloud.md)
+* [spring 链式事务](docs/spring_link_trans.md)
 
 
-6-1
+6-4
 
 
 
