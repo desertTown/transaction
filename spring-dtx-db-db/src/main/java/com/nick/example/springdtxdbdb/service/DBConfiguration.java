@@ -7,7 +7,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.transaction.ChainedTransactionManager;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
@@ -32,10 +35,16 @@ public class DBConfiguration {
         return new JdbcTemplate(userDataSource);
     }
 
+    @Bean
+    public PlatformTransactionManager transactionManager(){
+        DataSourceTransactionManager userTM = new DataSourceTransactionManager(userDataSource());
+        DataSourceTransactionManager orderTM = new DataSourceTransactionManager(orderDataSource());
+        ChainedTransactionManager tm = new ChainedTransactionManager(userTM,orderTM);
+        return tm;
+    }
 
 
     @Bean
-//    @ConfigurationProperties(prefix = "spring.ds-order")
     @ConfigurationProperties(prefix = "spring.datasource.dsorder")
     public DataSourceProperties orderDataSourceProperties(){
         return new DataSourceProperties();
