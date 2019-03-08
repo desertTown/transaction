@@ -12,6 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping("/api/customer")
 public class CustomerResource {
 
     @Autowired
