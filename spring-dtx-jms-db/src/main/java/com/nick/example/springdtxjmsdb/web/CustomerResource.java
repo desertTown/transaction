@@ -43,7 +43,6 @@ public class CustomerResource {
         jmsTemplate.setReceiveTimeout(3000);
         Object reply = jmsTemplate.receiveAndConvert("customer:msg:reply");
         return String.valueOf(reply);
-//        return "";
     }
 
 }
