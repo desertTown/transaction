@@ -14,7 +14,10 @@
 * [spring 链式事务 DataSourceTransactionManager & ChainedTransactionManager](docs/spring_link_trans.md)
 * [spring 链式事务 JpaTransactionManager & ChainedTransactionManager](docs/spring_link_jpa_trans.md)
 * [spring 最大努力一次提交](docs/spring_hardest__trans.md)
+* [分布式事务实现模式与技术](docs/trans_techs.md)
+
     
+  
 
 6-7
 
